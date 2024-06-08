@@ -1,3 +1,4 @@
+const personagem = require("./personagem.entity");
 const service = require("./personagem.service");
 
 // READ ALL
@@ -18,9 +19,9 @@ async function readById(req, res) {
 
 // CREATE
 async function create(req, res) {
-  const novoItem = req.body;
-  if (!novoItem || !novoItem.nome) {
-    return res.status(400).send("ALERTA: Falta propriedade NOME");
+  const { error, value: novoItem } = personagem.validate(req.body);
+  if (error) {
+    return res.status(400).send({ error: error.details[0].message });
   }
   await service.create(novoItem);
   res.status(201).send(novoItem);
@@ -29,9 +30,9 @@ async function create(req, res) {
 // UPDATE BY ID
 async function updateById(req, res) {
   const id = req.params.id;
-  const novoItem = req.body;
-  if (!novoItem || !novoItem.nome) {
-    return res.status(400).send("ALERTA: Falta propriedade NOME");
+  const { error, value: novoItem } = personagem.validate(req.body);
+  if (error) {
+    return res.status(400).send({ error: error.details[0].message });
   }
   await service.updateById(id, novoItem);
   res.send(novoItem);
