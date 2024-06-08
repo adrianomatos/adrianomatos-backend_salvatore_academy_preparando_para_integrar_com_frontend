@@ -12,8 +12,9 @@ async function main() {
   // Express start
   const app = express();
 
-  // MIDDLEWARS do Express usando JSON no body
+  // MIDDLEWARE Express usando JSON no body
   app.use(express.json());
+  // MIDDLEWARECORS
   app.use(cors());
 
   // Endpoint HOME
@@ -23,6 +24,12 @@ async function main() {
 
   // Router de personagens
   app.use("/personagens", personagemRouter);
+
+  // MIDDLEWARE ERROR
+  app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).send({ error: "Algo deu errado!" });
+  });
 
   app.listen(3000, () =>
     console.log("Servidor rodando em http://localhost:3000")
