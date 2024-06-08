@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { connectToDatabase } = require("./db/database-connection");
+const cors = require("cors");
 
 // Rotas
 const personagemRouter = require("./personagem/personagem.router");
@@ -11,8 +12,9 @@ async function main() {
   // Express start
   const app = express();
 
-  // Midleware do Express usando JSON no body
+  // MIDDLEWARS do Express usando JSON no body
   app.use(express.json());
+  app.use(cors());
 
   // Endpoint HOME
   app.get("/", function (req, res) {
