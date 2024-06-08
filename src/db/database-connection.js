@@ -1,7 +1,8 @@
 const { MongoClient, ObjectId } = require("mongodb");
 
 const dbUrl = process.env.DATABASE_URL;
-const dbName = "mongodb_arquitetura_mvc";
+const dbName = "mongodb_integrar_com_frontend";
+// const dbName = "mongodb_arquitetura_mvc";
 
 const client = new MongoClient(dbUrl);
 
