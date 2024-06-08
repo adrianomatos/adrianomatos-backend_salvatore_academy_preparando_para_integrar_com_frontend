@@ -42,7 +42,8 @@ async function updateById(req, res) {
 async function deleteById(req, res) {
   const id = req.params.id;
   await service.deleteById(id);
-  res.send("Ítem removido com sucesso: " + id);
+  res.status(204).send();
+  // res.status(204).send({ message: "Ítem removido com sucesso: " + id });
 }
 
 module.exports = {
